@@ -40,7 +40,7 @@ struct Point2D
     end
 end
 Base.show(io::IO,p::Point2D) = print(io, string((p.x,p.y)))
-Base.:(==)(p1::Point2D, p2::Point2D)= p1.x == p2.x && p1.y == p2.y 
+Base.:(==)(p1::Point2D, p2::Point2D)= p1.x == p2.x && p1.y == p2.y
 
 
 
@@ -126,7 +126,7 @@ struct Polygon
     # Outer constructor with Varargs of Real, calls the inner constructor with Vector{Real}
     Polygon(coords::Real...) = Polygon(collect(coords))
 
-  
+
 end
 
 function Base.:(==)(p1::Polygon,p2::Polygon)
@@ -212,6 +212,13 @@ function perimeter(idk::Polygon)
         return isapprox(distance2D(idk.points[1],idk.points[3]),distance2D(idk.points[2],idk.points[4]))
     end
 end
+
+
+"""
+midpoint(p::Polyon)
+calculates the midpoint of the polygon.
+"""
+midpoint(p::Polygon) = Point2D(mean(map(pt -> pt.x, p.pts)), mean(map(pt -> pt.y, p.pts)))
 
 
 end # Geometry module
